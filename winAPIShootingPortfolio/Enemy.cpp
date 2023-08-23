@@ -36,11 +36,12 @@ HRESULT Enemy::init(const char* imageName, POINT position)
 
 
 
-	/*_effectPNGRender = new PNGRender;
-	_effectPNGRender->init();
-	_effectPNGRender->LoadImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
-	_effectPlaying = false;*/
+	//_effectPNGRender = new PNGRender;
+	//_effectPNGRender->init();
+	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
+	_effectPlaying = false;
 
+	D2DMANAGER->loadImageD2D("气颇", L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
 	_effectCurrentFrameX = 0;
 	_effectCurrentFrameY = 0;
 	return S_OK;
@@ -64,12 +65,13 @@ HRESULT Enemy::init(const char* imageName, POINT position, float startAngle)
 
 
 
-	/*_effectPNGRender = new PNGRender;
-	_effectPNGRender->init();
-	_effectPNGRender->LoadImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
+	//_effectPNGRender = new PNGRender;
+	//_effectPNGRender->init();
+	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
+	D2DMANAGER->loadImageD2D("气颇", L"Resources/Images/ShootingGame/Effect/boom.png", 960 , 576 , 5, 3);
 	_effectPlaying = false;
 	_effectCurrentFrameX = 0;
-	_effectCurrentFrameY = 0;*/
+	_effectCurrentFrameY = 0;
 	return S_OK;
 }
 
@@ -94,9 +96,10 @@ void Enemy::render(void)
 	{
 		draw();
 		animation();
-	}
-	else if (_effectPlaying)
-	{
+		//D2DMANAGER->beginDraw();
+		
+
+		//D2DMANAGER->endDraw();
 		/*_effectPNGRender->frameRender(getMemDC(),
 			_x - _effectPNGRender->getFrameWidth() / 2,
 			_y - _effectPNGRender->getFrameHeight() / 2,
@@ -114,6 +117,81 @@ void Enemy::render(void)
 		}*/
 	}
 
+
+	
+	else if (_effectPlaying)
+	{
+		//D2DMANAGER->beginDraw();
+		//D2DMANAGER->render("气颇", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
+		//	_effectCurrentFrameX, _effectCurrentFrameY);
+
+		//_effectCurrentFrameX++;
+		//if (D2DMANAGER-> getMaxFrameX() < _effectCurrentFrameX)
+		//{
+		//	_effectCurrentFrameX = 0;
+		//	_effectCurrentFrameY++;
+		//	if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
+		//	{
+		//		_effectPlaying = false;
+		//	}
+		//}
+
+		//D2DMANAGER->endDraw();
+		// 
+		// 
+		//_effectPNGRender->frameRender(getMemDC(),
+		//	_x - _effectPNGRender->getFrameWidth() / 2,
+		//	_y - _effectPNGRender->getFrameHeight() / 2,
+		//	_effectCurrentFrameX,
+		//	_effectCurrentFrameY);
+		//_effectCurrentFrameX++;
+		//if (_effectPNGRender->getMaxFrameX() < _effectCurrentFrameX)
+		//{
+		//	_effectCurrentFrameX = 0;
+		//	_effectCurrentFrameY++;
+		//	if (_effectPNGRender->getMaxFrameY() < _effectCurrentFrameY)
+		//	{
+		//		_effectPlaying = false;
+		//	}
+		//}
+	}
+
+}
+
+void Enemy::d2drender(void)
+{
+	D2DMANAGER->render("气颇", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
+		_effectCurrentFrameX, _effectCurrentFrameY);
+
+	_effectCurrentFrameX++;
+	if (D2DMANAGER->getMaxFrameX() < _effectCurrentFrameX)
+	{
+		_effectCurrentFrameX = 0;
+		_effectCurrentFrameY++;
+		if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
+		{
+			_effectPlaying = false;
+		}
+	}
+
+
+	if (_effectPlaying)
+	{
+		D2DMANAGER->render("气颇", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
+			_effectCurrentFrameX, _effectCurrentFrameY);
+
+		_effectCurrentFrameX++;
+		if (D2DMANAGER->getMaxFrameX() < _effectCurrentFrameX)
+		{
+			_effectCurrentFrameX = 0;
+			_effectCurrentFrameY++;
+			if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
+			{
+				_effectPlaying = false;
+			}
+		}
+
+	}
 }
 
 void Enemy::playEffect()

@@ -15,7 +15,7 @@ public:
 	virtual void release(void);
 	virtual void update(void);
 	virtual void render(void);
-	
+	virtual void d2drender(void);
 
 	GImage* getBackBuffer(void) { return _backBuffer; }
 

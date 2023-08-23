@@ -139,8 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullets.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="D2DImageManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Flame.cpp" />
@@ -162,8 +164,10 @@
     <ClCompile Include="winAPIShootingPortfolio.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Bullets.h" />
     <ClInclude Include="CommonMacroFunction.h" />
+    <ClInclude Include="D2DImageManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Flame.h" />

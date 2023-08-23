@@ -43,6 +43,7 @@ public:
 	void release(void);
 	virtual void update(void);
 	virtual void render(void);
+	virtual void d2drender(void);
 
 	void playEffect();
 

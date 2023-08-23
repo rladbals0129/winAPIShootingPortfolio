@@ -79,7 +79,9 @@ void MainGame::render(void)
 	
 
 	_currentScene->render();
-
+	D2DMANAGER->beginDraw();
+	_currentScene->d2drender();
+	D2DMANAGER->endDraw();
 	TIMEMANAGER->render(getMemDC());
 
 	//=================================================

@@ -12,7 +12,7 @@ public:
 	void release(void);
 	void update(void);
 	void render(void);
-
+	void d2drender(void);
 	virtual void collision(void);
 
 };

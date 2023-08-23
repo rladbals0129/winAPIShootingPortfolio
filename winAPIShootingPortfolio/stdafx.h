@@ -49,6 +49,7 @@ using namespace  std;
 #include "FontManager.h"
 #include "Utils.h"
 #include "TimeManager.h"
+#include "D2DImageManager.h"
 
 
 
@@ -69,6 +70,7 @@ using namespace MY_UTIL;
 #define IMAGEMANAGER ImageManager::getSingleton()
 #define FONTMANAGER FontManager::getSingleton()
 #define TIMEMANAGER TimeManager::getSingleton()
+#define D2DMANAGER D2DImageManager::getSingleton()
 
 
 

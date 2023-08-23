@@ -42,3 +42,8 @@ void ShootingMap::render(void)
 
 
 }
+
+void ShootingMap::d2drender(void)
+{
+	_em->d2drender();
+}

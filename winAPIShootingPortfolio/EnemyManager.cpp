@@ -66,16 +66,28 @@ void EnemyManager::update(void)
 
 void EnemyManager::render()
 {
+	//D2DMANAGER->beginDraw();
+
 	for (_viMinion = _vMinion.begin(); _viMinion != _vMinion.end(); ++_viMinion)
 	{
 		(*_viMinion)->render();
 	}
 
+	//D2DMANAGER->endDraw();
 	//for (_viSnake = _vSnake.begin(); _viSnake != _vSnake.end(); ++_viSnake)
 	//{
 	//	(*_viSnake)->render();
 	//}
 
+
+}
+
+void EnemyManager::d2drender()
+{
+	for (_viMinion = _vMinion.begin(); _viMinion != _vMinion.end(); ++_viMinion)
+	{
+		(*_viMinion)->d2drender();
+	}
 
 }
 
