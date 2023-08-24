@@ -5,20 +5,31 @@ HRESULT Rocket::init(void)
 {
 	_x = static_cast<float>(WINSIZE_X / 2);
 	_y = static_cast<float>(WINSIZE_Y / 2);
-	_imageCreate = IMAGEMANAGER->addFrameImage("肺南积己", "Resources/Images/ShootingGame/Player/Player_Ending.bmp",
-		223, 
-		76,
-		7,1,
-		true, RGB(255, 0, 255));
+	_createY = WINSIZE_Y + 40;
+
 	_image = IMAGEMANAGER->addFrameImage("肺南", "Resources/Images/ShootingGame/Player/Move_LR_A.bmp",
-		223, 39,
+		446, 78,
 		7, 1,
 		true,
 		RGB(255, 0, 255));
-	_animPlayer = new Animation;
-	_animPlayer->init(_image->getWidth(), _image->getHeight(), 31, 39);
-	_animPlayer->setDefPlayFrame(false, true);
-	_animPlayer->setFPS(1);
+
+
+
+	_imageCreate = IMAGEMANAGER->addImage("肺南积己", "Resources/Images/ShootingGame/Player/Player_Ending.bmp",
+		446,
+		152,
+		true, RGB(255, 0, 255));
+	_animA = new Animation;
+
+
+	_animA->init(_imageCreate->getWidth(), _imageCreate->getHeight(), 63, 152);
+	
+	_animA->setDefPlayFrame(false, true);
+	_animA->setFPS(3);
+
+	_createPlayer = false;
+
+
 	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
 	_flame = new Flame;
 	_flame->init("阂", &_x, &_y);
@@ -45,13 +56,51 @@ void Rocket::release(void)
 	_beam->release();
 	SAFE_DELETE(_beam);
 
+	_animA->release();
+	SAFE_DELETE(_animA);
+
 }
 
 void Rocket::update(void)
 {
 	if (!_createPlayer)
 	{
+		
+		if(!_animCrate)
+		{
+			_animA->AniStart();
+			_animCrate = true;
+		}
+		
+		if (_animA->getNowPlayIdx() > 4)
+		{
+			if (!_setCreateAnim)
+			{
+				_animA->setPlayFrame(4, 6, false, true);
+			
+				_setCreateAnim = true;
+			}
+			
+		}
 
+		if (!_setCreateAnim)
+		{
+			_createY -= 5;
+			_animA->frameUpdate(0.016f);
+		}
+		else
+		{
+			_animA->frameUpdate(0.016f,4);
+			_createY += 1;
+			if (_createY > 700)
+			{
+				_createPlayer = true;
+			}
+		}
+
+		
+		cout << _animA->getNowPlayIdx() << endl;
+		//cout << _createPlayer << endl;
 	}
 
 	if (_createPlayer)
@@ -128,10 +177,18 @@ void Rocket::update(void)
 
 void Rocket::render()
 {
-	_image->frameRender(getMemDC(), _rc.left, _rc.top,_currentFrame,0);
-	_flame->render();
-	_missile->render();
-	_beam->render();
+	if (!_createPlayer)
+	{
+		_imageCreate->aniRender(getMemDC(), WINSIZE_X / 2, _createY, _animA);
+	}
+	else
+	{
+		_image->frameRender(getMemDC(), _rc.left, _rc.top, _currentFrame, 0);
+		_flame->render();
+		_missile->render();
+		_beam->render();
+	}
+
 }
 
 void Rocket::usingSkill()

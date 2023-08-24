@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GImage.h"
-
+#include "Animation.h"
 
 GImage::GImage() :_imageInfo(nullptr),
 _fileName(nullptr),
@@ -803,4 +803,10 @@ void GImage::loopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int of
 {
 
 
+}
+
+void GImage::aniRender(HDC hdc, int destX, int destY, Animation* ani)
+{
+	render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y,
+		ani->getFrameWidth(), ani->getFrameHeight());
 }

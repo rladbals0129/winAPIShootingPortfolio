@@ -21,13 +21,17 @@ private:
 	Flame* _flame;
 
 	int _currentFrame;
-	Animation* _animPlayer;
+	Animation* _animA;
+	Animation* _animMove;
 	//skill
 	EWeapon _setWeapon;
 	MissileM1* _missile;
 	Beam* _beam;
 	bool _beamIrradiation;
 
+	int _createY;
+	bool _animCrate;
+	bool _setCreateAnim;
 
 	RECT _rc;
 	float _x, _y;

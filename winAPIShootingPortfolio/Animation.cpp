@@ -100,18 +100,85 @@ void Animation::setDefPlayFrame(bool reverse, bool loop)
 }
 
 //원하는 프레임(위치) 출력 가능
-void Animation::setPlayFrame(int* playArr, int arrLen, bool loop)
+void Animation::setPlayFrame(int* playARR, int arrLen, bool loop)
 {
+    _loop = loop;
+   // _playList.clear();
+
+    if (_loop)
+    {
+        for (int i = 0; i < arrLen; i++)
+        {
+            _playList.push_back(playARR[i]);
+        }
+
+        for (int i = arrLen - 2; i > 0; i--)
+        {
+            _playList.push_back(playARR[i]);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < arrLen; i++)
+        {
+            _playList.push_back(playARR[i]);
+        }
+    }
+
+
 }
 
 //지정해준 구간만 잘라서 재생 -> S -> E
 void Animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 {
+    _loop = loop;
+    //_playList.clear();
+    if (reverse)
+    {
+        if (_loop)
+        {
+            for (int i = start; i < end; i++)
+            {
+                _playList.push_back(i);
+            }
 
+            for (int i = end - 2; i > start; i--)
+            {
+                _playList.push_back(i);
+            }
+        }
+        else
+        {
+            for (int i = start; i <= end; i++)
+            {
+                _playList.push_back(i);
+            }
+
+            for (int i = end - 2; i > start; i--)
+            {
+                _playList.push_back(i);
+            }
+        }
+    }
+    else
+    {
+        for (int i = start; i < end; i++)
+        {
+            _playList.push_back(i);
+        }
+    }
 }
 
 void Animation::setFPS(int framePerSec)
 {
+    _frameUpdateSec = 1.f / framePerSec;
+    /*
+    _frameUpdateSec은 각 프레임 사이에 얼마나 시간이 지나야 다음프레임에 도달하는지에대한 변수
+    framePerSec은 초당프레임 변수이다
+    Sec단위이기때문에 1.f / framePerSec을 하면 원하는 프레임 속도를 맞춰 애니메이션을
+    재생할 수 있다.
+
+    */
 }
 
 void Animation::frameUpdate(float elapsedTime)
@@ -130,6 +197,33 @@ void Animation::frameUpdate(float elapsedTime)
                 if (_loop)
                 {
                     _nowPlayIdx = 0;
+                }
+                else
+                {
+                    _nowPlayIdx--;
+                    _isPlay = false;
+                }
+            }
+        }
+    }
+}
+
+void Animation::frameUpdate(float elapsedTime, int start)
+{
+    if (_isPlay)
+    {
+        _elapsedSec += elapsedTime;
+
+        if (_elapsedSec >= _frameUpdateSec)
+        {
+            _elapsedSec -= _frameUpdateSec;
+
+            _nowPlayIdx++;
+            if (_nowPlayIdx == _playList.size())
+            {
+                if (_loop)
+                {
+                    _nowPlayIdx = start;
                 }
                 else
                 {

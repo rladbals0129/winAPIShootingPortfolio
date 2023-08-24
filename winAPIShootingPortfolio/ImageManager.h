@@ -52,6 +52,6 @@ public:
 	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
 	void loopAlphaRender(string strKey, HDC hdc, const LPRECT drawArea, int offsetX, int offsetY, BYTE alpha);
 
-
+	void aniRender(string strKey,HDC hdc, int destX, int destY, Animation* ani);
 };
 

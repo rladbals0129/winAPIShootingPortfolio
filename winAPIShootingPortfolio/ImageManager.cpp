@@ -206,3 +206,9 @@ void ImageManager::loopAlphaRender(string strKey, HDC hdc, const LPRECT drawArea
 	if (img) img->loopAlphaRender(hdc, drawArea, offsetX, offsetY, alpha);
 
 }
+
+void ImageManager::aniRender(string strKey, HDC hdc, int destX, int destY, Animation* ani)
+{
+	GImage* img = findImage(strKey);
+	if (img) img->aniRender(hdc, destX, destY, ani);
+}

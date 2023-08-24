@@ -40,6 +40,7 @@ public:
     void setFPS(int framePerSec);
 
     void frameUpdate(float elapsedTime);
+    void frameUpdate(float elapsedTime, int start);
 
     void AniStart(void);
     void AniStop(void);

@@ -1,4 +1,6 @@
 #pragma once
+class Animation;
+
 class GImage
 {
 public:
@@ -106,7 +108,7 @@ public:
 	void loopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY); 
 	void loopAlphaRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY, BYTE alpha);
 
-
+	void aniRender(HDC hdc, int destX, int destY, Animation* ani);
 	inline HDC getMemDC(void) { return _imageInfo->hMemDC; }
 
 	inline float getX(void) { return _imageInfo->x; }
