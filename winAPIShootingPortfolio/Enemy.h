@@ -29,7 +29,7 @@ protected:
 	virtual void animation(void);
 
 private:
-	PNGRender* _effectPNGRender;
+	//PNGRender* _effectPNGRender;
 	int _effectCurrentFrameX;
 	int _effectCurrentFrameY;
 	bool _effectPlaying;

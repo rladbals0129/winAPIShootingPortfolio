@@ -31,17 +31,13 @@ HRESULT Enemy::init(const char* imageName, POINT position)
 		_image->getFrameWidth(), _image->getFrameHeight());
 	_die = false;
 
-	IMAGEMANAGER->addImage("Ã¼·Â", "Resources/Images/ShootingGame/UI/hpUI.bmp", 152, 32, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("Ã¼·Â¹Ù", "Resources/Images/ShootingGame/UI/hpbarUI.bmp", 117, 20, true, RGB(255, 0, 255));
-
-
 
 	//_effectPNGRender = new PNGRender;
 	//_effectPNGRender->init();
 	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
 	_effectPlaying = false;
 
-	D2DMANAGER->loadImageD2D("ÆøÆÄ", L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
+	D2DMANAGER->loadImageD2D("ÆøÆÄ", L"Resources/Images/ShootingGame/Effect/boom2.png", 360, 27, 12, 1);
 	_effectCurrentFrameX = 0;
 	_effectCurrentFrameY = 0;
 	return S_OK;
@@ -68,7 +64,7 @@ HRESULT Enemy::init(const char* imageName, POINT position, float startAngle)
 	//_effectPNGRender = new PNGRender;
 	//_effectPNGRender->init();
 	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
-	D2DMANAGER->loadImageD2D("ÆøÆÄ", L"Resources/Images/ShootingGame/Effect/boom.png", 960 , 576 , 5, 3);
+	D2DMANAGER->loadImageD2D("ÆøÆÄ", L"Resources/Images/ShootingGame/Effect/boom2.png", 360, 27, 12, 1);
 	_effectPlaying = false;
 	_effectCurrentFrameX = 0;
 	_effectCurrentFrameY = 0;
@@ -159,7 +155,7 @@ void Enemy::render(void)
 }
 
 void Enemy::d2drender(void)
-{
+{/*
 	D2DMANAGER->render("ÆøÆÄ", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
 		_effectCurrentFrameX, _effectCurrentFrameY);
 
@@ -172,7 +168,7 @@ void Enemy::d2drender(void)
 		{
 			_effectPlaying = false;
 		}
-	}
+	}*/
 
 
 	if (_effectPlaying)

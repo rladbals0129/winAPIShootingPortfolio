@@ -7,6 +7,8 @@ class ShootingMap : public GameNode
 private:
 	Rocket* _rocket;
 	EnemyManager* _em;
+	int _x; 
+	int _y;
 public:
 	HRESULT init(void);
 	void release(void);

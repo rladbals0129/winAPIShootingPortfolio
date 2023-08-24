@@ -5,12 +5,25 @@ HRESULT Rocket::init(void)
 {
 	_x = static_cast<float>(WINSIZE_X / 2);
 	_y = static_cast<float>(WINSIZE_Y / 2);
-	_image = IMAGEMANAGER->addImage("肺南", "Resources/Images/ShootingGame/Player/Rocket.bmp", 52, 64, true, RGB(255, 0, 255));
-	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());
+	_imageCreate = IMAGEMANAGER->addFrameImage("肺南积己", "Resources/Images/ShootingGame/Player/Player_Ending.bmp",
+		223, 
+		76,
+		7,1,
+		true, RGB(255, 0, 255));
+	_image = IMAGEMANAGER->addFrameImage("肺南", "Resources/Images/ShootingGame/Player/Move_LR_A.bmp",
+		223, 39,
+		7, 1,
+		true,
+		RGB(255, 0, 255));
+	_animPlayer = new Animation;
+	_animPlayer->init(_image->getWidth(), _image->getHeight(), 31, 39);
+	_animPlayer->setDefPlayFrame(false, true);
+	_animPlayer->setFPS(1);
+	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
 	_flame = new Flame;
 	_flame->init("阂", &_x, &_y);
 
-
+	_currentFrame = 1;
 	_beam = new Beam;
 	_beam->init(1, 0.5f);
 	_beamIrradiation = false;
@@ -36,68 +49,86 @@ void Rocket::release(void)
 
 void Rocket::update(void)
 {
-
-	if (KEYMANAGER->isStayKeyDown('D') && _rc.right < WINSIZE_X && !_beamIrradiation)
+	if (!_createPlayer)
 	{
-		_x += ROCKET_SPEED;
-	}
-
-	if (KEYMANAGER->isStayKeyDown('A') && _rc.left > 0 && !_beamIrradiation)
-	{
-		_x -= ROCKET_SPEED;
 
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S') && _rc.bottom < WINSIZE_Y)
+	if (_createPlayer)
 	{
-		_y += ROCKET_SPEED;
-	}
 
-	if (KEYMANAGER->isStayKeyDown('W') && _rc.top > 0)
-	{
-		_y -= ROCKET_SPEED;
-	}
-
-	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());
-
-
-
-	usingSkill();
-
-	switch (_setWeapon)
-	{
-	case MISSILE:
-		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && _rc.right < WINSIZE_X && !_beamIrradiation)
 		{
-			_missile->fire((_rc.left + _rc.right) / 2, _rc.top);
+			_x += ROCKET_SPEED;
+			
 		}
-		break;
-	case BEAM:
-		if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+		if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
 		{
-			_beam->fire(_x, _y - 430);
-			_beamIrradiation = true;
-		}
-		else
-		{
-			_beamIrradiation = false;
+			
 		}
 
-		break;
-	default:
-		break;
+		if (KEYMANAGER->isStayKeyDown(VK_LEFT) && _rc.left > 0 && !_beamIrradiation)
+		{
+			_x -= ROCKET_SPEED;
+			
+		}
+		if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+		{
+			
+		}
+
+		if (KEYMANAGER->isStayKeyDown(VK_DOWN) && _rc.bottom < WINSIZE_Y)
+		{
+			_y += ROCKET_SPEED;
+		}
+
+		if (KEYMANAGER->isStayKeyDown(VK_UP) && _rc.top > 0)
+		{
+			_y -= ROCKET_SPEED;
+		}
+
+		_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());
+
+
+
+		usingSkill();
+
+		switch (_setWeapon)
+		{
+		case MISSILE:
+			if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+			{
+				_missile->fire((_rc.left + _rc.right) / 2, _rc.top);
+			}
+			break;
+		case BEAM:
+			if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+			{
+				_beam->fire(_x, _y - 430);
+				_beamIrradiation = true;
+			}
+			else
+			{
+				_beamIrradiation = false;
+			}
+
+			break;
+		default:
+			break;
+		}
+
+
+
+		_missile->update();
+		_beam->update();
+		_flame->update();
 	}
-
-
-
-	_missile->update();
-	_beam->update();
-	_flame->update();
+	
 }
 
 void Rocket::render()
 {
-	_image->render(getMemDC(), _rc.left, _rc.top);
+	_image->frameRender(getMemDC(), _rc.left, _rc.top,_currentFrame,0);
 	_flame->render();
 	_missile->render();
 	_beam->render();

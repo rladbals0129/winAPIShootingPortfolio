@@ -2,8 +2,10 @@
 #include "GameNode.h"
 #include "Flame.h"
 #include "Bullets.h"
+#include "Animation.h"
 
 #define ROCKET_SPEED 3.0f
+
 
 enum EWeapon
 {
@@ -13,11 +15,13 @@ enum EWeapon
 class Rocket : public GameNode
 {
 private:
+	GImage* _imageCreate;
 	GImage* _image;
+
 	Flame* _flame;
 
-
-
+	int _currentFrame;
+	Animation* _animPlayer;
 	//skill
 	EWeapon _setWeapon;
 	MissileM1* _missile;
@@ -27,6 +31,8 @@ private:
 
 	RECT _rc;
 	float _x, _y;
+
+	bool _createPlayer;
 
 
 
