@@ -61,7 +61,31 @@ void EnemyManager::update(void)
 			}
 		}
 	}
+	//for (int i = 0; i < _vMinion.size(); i++)
+	//{
+	//	if (!_vMinion[i]->getDeleteObjet())
+	//	{
+	//		_vMinion[i]->update();
+	//		if (_vMinion[i]->getDie() && !_vMinion[i]->isEffectPlaying())
+	//		{
+	//			removeMinion(i);
+	//			--i;
+	//		}
+	//	}
+	//}
+	//for (_viMinion = _vMinion.begin(); _viMinion != _vMinion.end(); ++_viMinion)
+	//{
 
+	//	if (!(*_viMinion)->getDeleteObjet())
+	//	{
+	//		(*_viMinion)->update();
+	//		if ((*_viMinion)->getDie() && (*_viMinion)->isEffectPlaying())
+	//		{
+	//			removeMinion(_vMinion.begin() + (*_viMinion));
+	//		}
+	//	}
+	//}
+	//_deleteObject
 }
 
 void EnemyManager::render()

@@ -92,85 +92,16 @@ void Enemy::render(void)
 	{
 		draw();
 		animation();
-		//D2DMANAGER->beginDraw();
-		
-
-		//D2DMANAGER->endDraw();
-		/*_effectPNGRender->frameRender(getMemDC(),
-			_x - _effectPNGRender->getFrameWidth() / 2,
-			_y - _effectPNGRender->getFrameHeight() / 2,
-			_effectCurrentFrameX,
-			_effectCurrentFrameY);
-		_effectCurrentFrameX++;
-		if (_effectPNGRender->getMaxFrameX() < _effectCurrentFrameX)
-		{
-			_effectCurrentFrameX = 0;
-			_effectCurrentFrameY++;
-			if (_effectPNGRender->getMaxFrameY() < _effectCurrentFrameY)
-			{
-				_effectPlaying = false;
-			}
-		}*/
 	}
 
 
 	
-	else if (_effectPlaying)
-	{
-		//D2DMANAGER->beginDraw();
-		//D2DMANAGER->render("ÆøÆÄ", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
-		//	_effectCurrentFrameX, _effectCurrentFrameY);
-
-		//_effectCurrentFrameX++;
-		//if (D2DMANAGER-> getMaxFrameX() < _effectCurrentFrameX)
-		//{
-		//	_effectCurrentFrameX = 0;
-		//	_effectCurrentFrameY++;
-		//	if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
-		//	{
-		//		_effectPlaying = false;
-		//	}
-		//}
-
-		//D2DMANAGER->endDraw();
-		// 
-		// 
-		//_effectPNGRender->frameRender(getMemDC(),
-		//	_x - _effectPNGRender->getFrameWidth() / 2,
-		//	_y - _effectPNGRender->getFrameHeight() / 2,
-		//	_effectCurrentFrameX,
-		//	_effectCurrentFrameY);
-		//_effectCurrentFrameX++;
-		//if (_effectPNGRender->getMaxFrameX() < _effectCurrentFrameX)
-		//{
-		//	_effectCurrentFrameX = 0;
-		//	_effectCurrentFrameY++;
-		//	if (_effectPNGRender->getMaxFrameY() < _effectCurrentFrameY)
-		//	{
-		//		_effectPlaying = false;
-		//	}
-		//}
-	}
+	
 
 }
 
 void Enemy::d2drender(void)
-{/*
-	D2DMANAGER->render("ÆøÆÄ", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
-		_effectCurrentFrameX, _effectCurrentFrameY);
-
-	_effectCurrentFrameX++;
-	if (D2DMANAGER->getMaxFrameX() < _effectCurrentFrameX)
-	{
-		_effectCurrentFrameX = 0;
-		_effectCurrentFrameY++;
-		if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
-		{
-			_effectPlaying = false;
-		}
-	}*/
-
-
+{
 	if (_effectPlaying)
 	{
 		D2DMANAGER->render("ÆøÆÄ", _x - D2DMANAGER->getFrameWidth() / 2, _y - D2DMANAGER->getFrameHeight() / 2,
@@ -184,9 +115,9 @@ void Enemy::d2drender(void)
 			if (D2DMANAGER->getMaxFrameY() < _effectCurrentFrameY)
 			{
 				_effectPlaying = false;
+				_deleteObject = true;
 			}
 		}
-
 	}
 }
 

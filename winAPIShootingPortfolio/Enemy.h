@@ -18,6 +18,7 @@ protected:
 	float _startAngle;
 
 	bool _die;
+	bool _deleteObject;
 	int _diePosX;
 	int _diePosY;
 
@@ -55,6 +56,7 @@ public:
 
 
 	bool getDie() { return _die; }
+	bool getDeleteObjet() { return _deleteObject; }
 	void setDie(bool die) { _die = die; _diePosX = _rc.left - 80; _diePosY = _rc.top - 50; if (die) playEffect(); }
 	bool isEffectPlaying() { return _effectPlaying; }
 	Enemy(void);

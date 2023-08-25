@@ -32,5 +32,36 @@ void ShootingMap::collision(void)
 			}
 		}
 	}
+
+
+	for (int i = 0; i < _rocket->getAssiM1L()->getBullets().size(); i++)
+	{
+		for (int j = 0; j < _em->getMinions().size(); j++)
+		{
+			RECT rc;
+			if (IntersectRect(&rc, &_rocket->getAssiM1L()->getBullets()[i].rc,
+				&CollisionAreaResizing(_em->getMinions()[j]->getRect(), 40, 30)))
+			{
+				_em->getMinions()[j]->setDie(true);
+				_rocket->removeAssiMissileLeft(i);
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < _rocket->getAssiM1R()->getBullets().size(); i++)
+	{
+		for (int j = 0; j < _em->getMinions().size(); j++)
+		{
+			RECT rc;
+			if (IntersectRect(&rc, &_rocket->getAssiM1R()->getBullets()[i].rc,
+				&CollisionAreaResizing(_em->getMinions()[j]->getRect(), 40, 30)))
+			{
+				_em->getMinions()[j]->setDie(true);
+				_rocket->removeAssiMissileRight(i);
+				break;
+			}
+		}
+	}
 }
 

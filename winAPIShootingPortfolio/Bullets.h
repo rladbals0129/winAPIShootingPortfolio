@@ -3,11 +3,13 @@
 
 #define BULLETS_COUNT 4.0f
 
-//적도 총알쓰고 나도 총알쓰고.. 슈팅게임에선 당연하다. 공통되는 특성들을 적용하자
-//기능을 묶었다 묶을수있는건 묶자
+
 struct tagBullet
 {
 	GImage* img;
+
+	GImage* boom;
+
 	RECT rc;
 	int radius;
 	int count;
@@ -19,38 +21,35 @@ struct tagBullet
 	bool fire;
 };
 
-//총알은 서브객체. 누군가가 쏘면 발사된다
-//모든 총알의 공통점 : 움직이고, 그려지고, 충돌한다
 
-//배열처럼 미리 장전을 해두고 발사
-class Missile : public GameNode
-{
-protected:
-	vector<tagBullet> _vBullet;
-	vector<tagBullet>::iterator _viBullet;
-	float _range;
+//class Missile : public GameNode
+//{
+//protected:
+//	vector<tagBullet> _vBullet;
+//	vector<tagBullet>::iterator _viBullet;
+//	float _range;
+//
+//public:
+//
+//
+//	virtual HRESULT init(int bulletMax, float range);
+//	void release(void);
+//	void update(void);
+//	void render();
+//
+//	void draw(void);
+//	//int fire(float x, float y);
+//	virtual void fire(float x, float y);
+//
+//	virtual void move(void);
+//
+//	Missile() {}
+//	~Missile() {}
+//
+//
+//};
 
-public:
 
-
-	virtual HRESULT init(int bulletMax, float range);
-	void release(void);
-	void update(void);
-	void render();
-
-	void draw(void);
-	//int fire(float x, float y);
-	virtual void fire(float x, float y);
-
-	virtual void move(void);
-
-	Missile() {}
-	~Missile() {}
-
-
-};
-
-// 발사가 될때마다 만들고 삭제
 class MissileM1 : public GameNode
 {
 private:
@@ -66,7 +65,7 @@ public:
 	void update(void);
 	void render();
 
-	void fire(float x, float y);
+	void fire(const char* filepath, float x, float y);
 	void draw(void);
 	void move(void);
 
@@ -74,15 +73,7 @@ public:
 	void removeBullet(int arrNum);
 	MissileM1() {}
 	~MissileM1() {}
-	//RECT getPos()
-//{
-//	for (auto& bullet : _vBullet)
-//	{
-//		if (!bullet.fire) continue;
 
-//		return bullet.rc;
-//	}
-//}
 };
 
 class Beam : public GameNode
@@ -90,9 +81,12 @@ class Beam : public GameNode
 private:
 	vector<tagBullet> _vBullet;
 	vector<tagBullet>::iterator _viBullet;
+	vector<tagBullet> _vBoom;
+	vector<tagBullet>::iterator _viBoom;
 	float _range;
 
 	int _bulletMax;
+	bool _createBoobBullet;
 
 public:
 	HRESULT init(int bulletMax, float range);
@@ -103,6 +97,7 @@ public:
 	void fire(float x, float y);
 	void draw(void);
 	void move(void);
+	void boobBulletAnim();
 	vector<tagBullet> getBullets(void) { return _vBullet; }
 
 
@@ -111,6 +106,32 @@ public:
 	~Beam() {}
 
 
+};
+
+class AssistanceM1 : public GameNode
+{
+private:
+	vector<tagBullet> _vBullet;
+	vector<tagBullet>::iterator _viBullet;
+	float _range;
+
+	int _bulletMax; 
+
+public:
+	HRESULT init(int bulletMax, float range);
+	void release(void);
+	void update(void);
+	void render();
+
+	void fire(float x, float y);
+	void draw(void);
+	void move(void);
+
+	vector<tagBullet> getBullets(void) { return _vBullet; }
+	void removeBullet(int arrNum);
+
+	AssistanceM1() {}
+	~AssistanceM1() {}
 };
 
 class EnemyMissile : public GameNode
