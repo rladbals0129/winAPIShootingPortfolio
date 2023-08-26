@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Rocket.h"
+#include "EnemyManager.h"
+#include "Boss.h"
 
 HRESULT Rocket::init(void)
 {
@@ -33,14 +35,18 @@ HRESULT Rocket::init(void)
 	//_animMove->setFPS(12);
 	_createPlayer = false;
 
+	_currentHp = 10;
+	_maxHp = 10;
+	_hpBar = new ProgressBar;
+	_hpBar->init(_x, _y, 54, 4);
 
 	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
 	//_flame = new Flame;
 	//_flame->init("บา", &_x, &_y);
 
 	_currentFrame = 3;
-	_beam = new Beam;
-	_beam->init(2, 800.f);
+	_boomMissile = new BoomMissile;
+	_boomMissile->init(2, 800.f);
 	_beamIrradiation = false;
 
 	_missile = new MissileM1;
@@ -62,8 +68,8 @@ void Rocket::release(void)
 	_missile->release();
 	SAFE_DELETE(_missile);
 
-	_beam->release();
-	SAFE_DELETE(_beam);
+	_boomMissile->release();
+	SAFE_DELETE(_boomMissile);
 
 	_animA->release();
 	SAFE_DELETE(_animA);
@@ -133,7 +139,7 @@ void Rocket::update(void)
 			_y -= ROCKET_SPEED;
 		}
 
-		_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
+		_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight()- 10);
 
 
 
@@ -141,8 +147,8 @@ void Rocket::update(void)
 		
 		if (KEYMANAGER->isOnceKeyDown('A'))
 		{
-			_beam->fire(286, WINSIZE_Y);
-			_beam->fire(WINSIZE_X/2 + 286, WINSIZE_Y);
+			_boomMissile->fire(286, WINSIZE_Y);
+			_boomMissile->fire(WINSIZE_X/2 + 286, WINSIZE_Y);
 		}
 
 		switch (_setWeapon)
@@ -236,12 +242,12 @@ void Rocket::update(void)
 		case BEAM:
 			if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 			{
-				_beam->fire(_x, _y - 430);
-				_beamIrradiation = true;
+				//_boomMissile->fire(_x, _y - 430);
+				//_beamIrradiation = true;
 			}
 			else
 			{
-				_beamIrradiation = false;
+				//_beamIrradiation = false;
 			}
 
 			break;
@@ -251,10 +257,16 @@ void Rocket::update(void)
 
 
 
+		_hpBar->setX(_x - (_rc.right - _rc.left) / 2);
+		_hpBar->setY(_y - (_rc.bottom - _rc.top) / 2);
+		_hpBar->update();
+		_hpBar->setGauge(_currentHp, _maxHp);
+		_hpBar->update();
+
 		_missile->update();
 		_assistM1Left->update();
 		_assistM1Right->update();
-		_beam->update();
+		_boomMissile->update();
 		//_flame->update();
 	}
 	
@@ -272,9 +284,9 @@ void Rocket::render()
 	_missile->render();
 	_assistM1Left->render();
 	_assistM1Right->render();
-	_beam->render();
+	_boomMissile->render();
 	
-
+	_hpBar->render();
 }
 
 void Rocket::usingSkill()

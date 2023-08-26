@@ -4,7 +4,7 @@
 HRESULT ShootingMap::init(void)
 {
 	//GameNode::init(true);
-
+	TIMEMANAGER->init();
 	IMAGEMANAGER->addImage("½´ÆÃ¸Ê", "Resources/Images/ShootingGame/BackGround/Stage_1.bmp",
 		WINSIZE_X,18164);
 
@@ -12,7 +12,16 @@ HRESULT ShootingMap::init(void)
 	_rocket->init();
 	_em = new EnemyManager;
 	_em->init();
-	_y = -18164 + WINSIZE_Y;
+	_y = - 18164 + WINSIZE_Y;
+	_boss = new Boss;
+
+	_em->setRocketMemoryAddress(_rocket);
+	_rocket->setEnemyManagerMemoryAddress(_em);
+
+	_rocket->setBossMemoryAddress(_em->getBoss());
+	_em->getBoss()->setRocketMemoryAddress(_rocket);
+
+
 	//_em->setMissileM1(_rocket->getMissileM1());
 	//_em->setBeam(_rocket->getBeam());
 	return S_OK;
@@ -28,7 +37,7 @@ void ShootingMap::update(void)
 {
 	collision();
 
-	_y +=2;
+	_y -= 6;
 
 	_rocket->update();
 	_em->update();
@@ -36,8 +45,8 @@ void ShootingMap::update(void)
 
 void ShootingMap::render(void)
 {
-	//RECT rc = { 0,0, WINSIZE_X,WINSIZE_Y };
-	IMAGEMANAGER->findImage("½´ÆÃ¸Ê")->render(getMemDC(),_x,_y);
+	RECT rc = { 0,0, WINSIZE_X,18164 };
+	IMAGEMANAGER->findImage("½´ÆÃ¸Ê")->loopRender(getMemDC(),&rc,_x,_y);
 	_rocket->render();
 	_em->render();
 

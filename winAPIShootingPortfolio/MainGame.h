@@ -1,6 +1,7 @@
 #pragma once
 #include "GameNode.h"
 #include "Title.h"
+#include "CharacterChoose.h"
 #include "ShootingMap.h"
 //#include "ResourceClass.h"
 
@@ -15,6 +16,7 @@ private:
 	//SecondScene* _second;
 	//Rocket* _rocket;
 	Title* _title;
+	CharacterChoose* _CharacterChoose;
 	ShootingMap* _shootingMap;
 
 	GameNode* _currentScene; 

@@ -132,6 +132,15 @@
     <ClCompile Include="Animation.cpp">
       <Filter>2D FrameWork\FrameWorkManager</Filter>
     </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>소스 파일\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>소스 파일\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterChoose.cpp">
+      <Filter>소스 파일\ShootingGame\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -205,6 +214,15 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>2D FrameWork\FrameWorkManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>소스 파일\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>소스 파일\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterChoose.h">
+      <Filter>소스 파일\ShootingGame\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,8 +8,6 @@ struct tagBullet
 {
 	GImage* img;
 
-	GImage* boom;
-
 	RECT rc;
 	int radius;
 	int count;
@@ -19,6 +17,8 @@ struct tagBullet
 	float speed;
 	float frameTick;
 	bool fire;
+
+	int frameX, frameY;
 };
 
 
@@ -76,7 +76,7 @@ public:
 
 };
 
-class Beam : public GameNode
+class BoomMissile : public GameNode
 {
 private:
 	vector<tagBullet> _vBullet;
@@ -102,9 +102,14 @@ public:
 
 
 
-	Beam() {}
-	~Beam() {}
+	BoomMissile() {}
+	~BoomMissile() {}
 
+
+};
+
+class Boom
+{
 
 };
 
@@ -134,26 +139,39 @@ public:
 	~AssistanceM1() {}
 };
 
-class EnemyMissile : public GameNode
+class EnemyBullet : public GameNode
 {
 private:
 	vector<tagBullet> _vBullet;
 	vector<tagBullet>::iterator _viBullet;
+
+	const char* _imageName;
+	int _bulletMax;
+
+
 	float _range;
 
-	int _bulletMax; // 장전이되있지 않기때문에 필요
-
 public:
-	HRESULT init(int bulletMax, float range);
+	HRESULT init(const char* imageName, int bulletMax, float range);
 	void release(void);
 	void update(void);
 	void render();
 
-	void fire(float x, float y);
+	void fire(float x, float y, float angle, float speed);
 	void draw(void);
 	void move(void);
 
-	vector<tagBullet> getBullets(void) { return _vBullet; }
+	void bossMove1();
+	void bossMove2();
+	void bossMove3();
+
 	void removeBullet(int arrNum);
 
+	vector<tagBullet> getBullet(void) { return _vBullet; }
+
+
+	EnemyBullet(void) {}	 
+	virtual ~EnemyBullet() {} 
 };
+
+

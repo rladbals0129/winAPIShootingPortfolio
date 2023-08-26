@@ -22,6 +22,9 @@ protected:
 	int _diePosX;
 	int _diePosY;
 
+	float _rndFireCount;
+	float _bulletFireCount;
+
 
 	float radius;
 	POINT _center;
@@ -45,7 +48,7 @@ public:
 	virtual void update(void);
 	virtual void render(void);
 	virtual void d2drender(void);
-
+	virtual bool bulletCountFire();
 	void playEffect();
 
 	RECT getRect(void) { return _rc; }
@@ -59,6 +62,13 @@ public:
 	bool getDeleteObjet() { return _deleteObject; }
 	void setDie(bool die) { _die = die; _diePosX = _rc.left - 80; _diePosY = _rc.top - 50; if (die) playEffect(); }
 	bool isEffectPlaying() { return _effectPlaying; }
+
+
+	
+
+
+
+
 	Enemy(void);
 	~Enemy(void) {}
 

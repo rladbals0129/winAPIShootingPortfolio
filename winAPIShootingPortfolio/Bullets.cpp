@@ -227,6 +227,8 @@ void MissileM1::move(void)
 		{
 			SAFE_DELETE(_viBullet->img);
 			_viBullet = _vBullet.erase(_viBullet);
+
+		
 		}
 		else
 		{
@@ -359,7 +361,7 @@ void AssistanceM1::removeBullet(int arrNum)
 }
 
 
-HRESULT Beam::init(int bulletMax, float range)
+HRESULT BoomMissile::init(int bulletMax, float range)
 {
 	_bulletMax = bulletMax;
 	_range = range;
@@ -367,7 +369,7 @@ HRESULT Beam::init(int bulletMax, float range)
 	return S_OK;
 }
 
-void Beam::release(void)
+void BoomMissile::release(void)
 {
 	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end(); ++_viBullet)
 	{
@@ -376,17 +378,17 @@ void Beam::release(void)
 	_vBullet.clear();
 }
 
-void Beam::update(void)
+void BoomMissile::update(void)
 {
 	move();
 }
 
-void Beam::render()
+void BoomMissile::render()
 {
 	draw();
 }
 
-void Beam::fire(float x, float y)
+void BoomMissile::fire(float x, float y)
 {
 	if (_bulletMax <= _vBullet.size()) return;
 
@@ -408,7 +410,18 @@ void Beam::fire(float x, float y)
 
 	_vBullet.push_back(bullet);
 
-
+	//tagBullet boomer;
+	//boomer.img = new GImage;
+	//boomer.img->init("Resources/Images/ShootingGame/Bullet/Bomb_Bullet4.bmp",
+	//	120, 128,
+	//	8, 4,
+	//	true,
+	//	RGB(255, 0, 255));
+	//boomer.x = boomer.fireX = x+100;
+	//boomer.y = boomer.fireY = y+100;
+	//boomer.rc = RectMakeCenter(boomer.x, boomer.y,
+	//	boomer.img->getFrameWidth(), boomer.img->getFrameHeight());
+	//_vBoom.push_back(boomer);
 
 	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end(); ++_viBullet)
 	{
@@ -423,48 +436,36 @@ void Beam::fire(float x, float y)
 	}
 }
 
-void Beam::draw(void)
+void BoomMissile::draw(void)
 {
+	
 	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end(); ++_viBullet)
 	{
-		_viBullet->img->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, _viBullet->img->getFrameX(), _viBullet->img->getFrameY());
+		
+			_viBullet->img->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, _viBullet->img->getFrameX(), _viBullet->img->getFrameY());
+			
+			_viBullet->count++;
 
-		_viBullet->count++;
-
-		if (_viBullet->count % 5 == 0)
-		{
-			_viBullet->img->setFrameX(_viBullet->img->getFrameX() + 1);
-
-			if (_viBullet->img->getFrameX() >= _viBullet->img->getMaxFrameX())
+			if (_viBullet->count % 5 == 0)
 			{
-				_viBullet->img->setFrameX(0);
+				_viBullet->img->setFrameX(_viBullet->img->getFrameX() + 1);
+
+				if (_viBullet->img->getFrameX() >= _viBullet->img->getMaxFrameX())
+				{
+					_viBullet->img->setFrameX(0);
+				}
+				_viBullet->count = 0;
 			}
-			_viBullet->count = 0;
-		}
+		
+		
 	}
 
-	for (_viBoom = _vBoom.begin(); _viBoom != _vBoom.end(); ++_viBoom)
-	{
-		_viBoom->boom->frameRender(getMemDC(), _viBoom->rc.left, _viBoom->rc.top, _viBoom->boom->getFrameX(), _viBoom->boom->getFrameY());
 
-		_viBoom->count++;
-
-		if (_viBoom->count % 5 == 0)
-		{
-			_viBoom->boom->setFrameX(_viBoom->boom->getFrameX() + 1);
-
-			if (_viBoom->boom->getFrameX() >= _viBoom->boom->getMaxFrameX())
-			{
-				_viBoom->boom->setFrameX(0);
-			}
-			_viBoom->count = 0;
-		}
-	}
 	
 
 }
 
-void Beam::move(void)
+void BoomMissile::move(void)
 {
 	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end();)
 	{
@@ -472,26 +473,9 @@ void Beam::move(void)
 		_viBullet->rc = RectMakeCenter(_viBullet->x, _viBullet->y, _viBullet->img->getFrameWidth(), _viBullet->img->getFrameHeight());
 
 		if (_range < getDistance(_viBullet->fireX, _viBullet->fireY, _viBullet->x, _viBullet->y))
-		{
-			_createBoobBullet = true;
-		/*	tagBullet boomer;
-			boomer.boom = new GImage;
-			boomer.boom->init("Resources/Images/ShootingGame/Bullet/Bomb_Bullet",
-				120, 128,
-				8, 4,
-				true,
-				RGB(255, 0, 255));
-					_vBoom.push_back(boomer);
-				*/
-			cout << _createBoobBullet << endl;
-
-		
-
+		{			
 			SAFE_DELETE(_viBullet->img);
-			_viBullet = _vBullet.erase(_viBullet);
-			
-			
-
+			_viBullet = _vBullet.erase(_viBullet);						
 		}
 		else
 		{
@@ -500,10 +484,6 @@ void Beam::move(void)
 	}
 }
 
-void Beam::boobBulletAnim()
-{
-
-}
 
 
 /*
@@ -521,3 +501,134 @@ _viBullet->boom->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top, 
 				}
 				_viBullet->count = 0;
 			}*/
+
+HRESULT EnemyBullet::init(const char* imageName, int bulletMax, float range)
+{
+	_imageName = imageName;
+	_range = range;
+	_bulletMax = bulletMax;
+
+	return S_OK;
+}
+
+void EnemyBullet::release(void)
+{
+	_vBullet.clear();
+}
+
+void EnemyBullet::update(void)
+{
+	move();
+	/*if (_imageName == "적미사일")
+	{
+		move();
+		cout << "일반" << endl;
+	}
+	else if (_imageName == "보스미사일1")
+	{
+		bossMove1();
+		cout << "나는1" << endl;
+	}
+	else if (_imageName == "보스미사일2")
+	{
+		bossMove2();
+		cout << "나는2" << endl;
+	}
+	else if (_imageName == "보스미사일3")
+	{
+		bossMove3();
+		cout << "나는3" << endl;
+	}*/
+
+}
+
+void EnemyBullet::render()
+{
+	draw();
+}
+
+void EnemyBullet::fire(float x, float y, float angle, float speed)
+{
+	if (_bulletMax <= _vBullet.size()) return;
+
+	tagBullet bullet;
+	ZeroMemory(&bullet, sizeof(tagBullet));
+	bullet.img = IMAGEMANAGER->findImage(_imageName);
+	bullet.angle = angle;
+	bullet.count = 0;
+
+	bullet.speed = speed;
+	bullet.x = bullet.fireX = x;
+	bullet.y = bullet.fireY = y;
+	bullet.rc = RectMakeCenter(bullet.x, bullet.y,
+		bullet.img->getFrameWidth(), bullet.img->getFrameHeight());
+
+	_vBullet.push_back(bullet);
+}
+
+void EnemyBullet::draw(void)
+{
+	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end(); ++_viBullet)
+	{
+
+		_viBullet->img->frameRender(getMemDC(), _viBullet->rc.left, _viBullet->rc.top,
+			_viBullet->frameX, _viBullet->frameY);
+		_viBullet->count++;
+
+		if (_viBullet->count % 15 == 0)
+		{
+			_viBullet->frameX++;
+			//_viBullet->img->setFrameX(_viBullet->img->getFrameX() + 1);
+
+			if (_viBullet->frameX >= _viBullet->img->getMaxFrameX())
+			{
+				_viBullet->frameX = 0;
+				//_viBullet->img->setFrameX(0);
+			}
+			_viBullet->count = 0;
+		}
+	}
+}
+
+void EnemyBullet::move(void)
+{
+	for (_viBullet = _vBullet.begin(); _viBullet != _vBullet.end();)
+	{
+		_viBullet->x += cos(_viBullet->angle) * _viBullet->speed;
+		_viBullet->y += -sinf(_viBullet->angle) * _viBullet->speed;
+
+		_viBullet->rc = RectMakeCenter(_viBullet->x, _viBullet->y, _viBullet->img->getFrameWidth(), _viBullet->img->getFrameHeight());
+
+		if (_range < getDistance(_viBullet->fireX, _viBullet->fireY, _viBullet->x, _viBullet->y))
+		{
+			_viBullet = _vBullet.erase(_viBullet);
+		}
+		else
+		{
+			++_viBullet;
+		}
+	}
+}
+
+void EnemyBullet::bossMove1()
+{
+
+}
+
+void EnemyBullet::bossMove2()
+{
+
+}
+
+void EnemyBullet::bossMove3()
+{
+
+}
+
+void EnemyBullet::removeBullet(int arrNum)
+{
+	_vBullet.erase(_vBullet.begin() + arrNum);
+
+}
+
+

@@ -1,43 +1,35 @@
 #pragma once
 #include "GameNode.h"
 #include "Enemy.h"
+#include "Bullets.h"
+#include "Boss.h"
+class Rocket;
 
 class EnemyManager : public GameNode
 {
 private:
 	typedef vector<Enemy*> vEnemy;
-	//타입 재정의: 여러 종류의 적을 관리하기 위한
-	//Enemy포인터 벡터
 	typedef vector<Enemy*>::iterator viEnemy;
 private:
-	vEnemy _vMinion; //고정된 부모 객체를 기반으로
-	//파생될 적을 저장할 벡터
+	vEnemy _vMinion; 
 	viEnemy _viMinion;
-	int* _minionHP;
 
-	//vEnemy _vSnake;
-	//viEnemy _viSnake;
-
-	/*
-	vEnemy 슬라임
-	....등등
-
-
-	*/
 private:
+	EnemyBullet* _bullet;
+	Rocket* _rocket;
 	
-	RECT _colider;
+	float _gameTime;
 
 private:
-
-
-	RECT _hpBar;
-	RECT _currentHpBar;
-
-	vector<bool> _vIsErased;
+	Boss* _boss;
+	EnemyBullet* _bossBullet1;
+	EnemyBullet* _bossBullet2;
+	EnemyBullet* _bossBullet3;
+	bool _bossCreate;
 
 private:
-
+	int _wave;
+	int _enemyIndex;
 public:
 	HRESULT init(void);
 	void release(void);
@@ -45,14 +37,23 @@ public:
 	void render(void);
 	void d2drender(void);
 
-	void setMinion(void);
-	//void setSnake(void);
+	
+	void spawnEnemy(void);
+
 
 
 	void removeMinion(int arrNum);
 
-	vector<Enemy*> getMinions(void) { return _vMinion; }
-	//vector<Enemy*> getSnake(void) { return _vSnake; }
-	void setErased(int arrNum) { _vIsErased[arrNum] = true; }
+	void minionBulletFire(void);
+	void collision(void);
 
+	vector<Enemy*> getMinions(void) { return _vMinion; }
+	EnemyBullet* getBullet(void) { return _bullet; }
+
+	Boss* getBoss(void) { return _boss; }
+
+
+	void setRocketMemoryAddress(Rocket* rk) { _rocket = rk; }
 };
+
+//void setMinion(void);

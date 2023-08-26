@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
+bool Enemy::bulletCountFire()
+{
+	//if (_rndFireCount + _bulletFireCount <= TIMEMANAGER->getWorldTime())
+	//{
+	//	_bulletFireCount = TIMEMANAGER->getWorldTime();
+	//	_rndFireCount = RND->getFromFloatTo(rndStart, rndEnd);
+
+	//	return true;
+	//}
+	//return false;
+	return false;
+}
+
 Enemy::Enemy(void) : _rc(RectMake(0, 0, 0, 0)),
 _currentFrameX(0),
 _currentFrameY(0),
@@ -9,7 +22,9 @@ _y(0.f),
 _worldTimeCount(0.f),
 _rndTimeCount(0.f),
 _animationCount(0),
-_animationSpeed(100)
+_animationSpeed(100),
+_rndFireCount(0.0f),
+_bulletFireCount(0.0f)
 {
 }
 
@@ -25,16 +40,17 @@ HRESULT Enemy::init(const char* imageName, POINT position)
 	_rndTimeCount = RND->getFromFloatTo(50.f, 150.f);
 
 	_image = IMAGEMANAGER->findImage(imageName);
+
 	_x = position.x;
 	_y = position.y;
 	_rc = RectMakeCenter(_x, _y,
 		_image->getFrameWidth(), _image->getFrameHeight());
 	_die = false;
+	_center = position;
 
+	_bulletFireCount = TIMEMANAGER->getWorldTime();
+	_rndFireCount = RND->getFromFloatTo(1.5f, 4.5f);
 
-	//_effectPNGRender = new PNGRender;
-	//_effectPNGRender->init();
-	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
 	_effectPlaying = false;
 
 	D2DMANAGER->loadImageD2D("ÆøÆÄ", L"Resources/Images/ShootingGame/Effect/boom2.png", 360, 27, 12, 1);
@@ -58,6 +74,9 @@ HRESULT Enemy::init(const char* imageName, POINT position, float startAngle)
 	_angle = 0.f;
 	radius = 300.f;
 	_die = false;
+
+	_bulletFireCount = TIMEMANAGER->getWorldTime();
+	_rndFireCount = RND->getFromFloatTo(1.5f, 4.5f);
 
 
 
