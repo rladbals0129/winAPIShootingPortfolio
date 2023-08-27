@@ -93,9 +93,6 @@
     <ClCompile Include="KeyManager.cpp">
       <Filter>2D FrameWork\FrameWorkManager</Filter>
     </ClCompile>
-    <ClCompile Include="PNGRender.cpp">
-      <Filter>2D FrameWork\FrameWorkManager</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>2D FrameWork\PCH</Filter>
     </ClCompile>
@@ -116,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>소스 파일\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Flame.cpp">
-      <Filter>소스 파일\Player</Filter>
     </ClCompile>
     <ClCompile Include="Rocket.cpp">
       <Filter>소스 파일\Player</Filter>
@@ -179,9 +173,6 @@
     <ClInclude Include="KeyManager.h">
       <Filter>2D FrameWork\FrameWorkManager</Filter>
     </ClInclude>
-    <ClInclude Include="PNGRender.h">
-      <Filter>2D FrameWork\FrameWorkManager</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>2D FrameWork\PCH</Filter>
     </ClInclude>
@@ -199,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>소스 파일\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Flame.h">
-      <Filter>소스 파일\Player</Filter>
     </ClInclude>
     <ClInclude Include="Rocket.h">
       <Filter>소스 파일\Player</Filter>

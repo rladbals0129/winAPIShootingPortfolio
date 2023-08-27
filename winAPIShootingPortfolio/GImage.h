@@ -87,7 +87,7 @@ public:
 
 
 	void render(HDC hdc);
-	void render(HDC hdc, int destX, int destY); //³¡x¿Í ³¡y
+	void render(HDC hdc, int destX, int destY);
 	void render(HDC hdc, int destX, int destY, int destWidth, int destHight);
 
 	void render(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHight);

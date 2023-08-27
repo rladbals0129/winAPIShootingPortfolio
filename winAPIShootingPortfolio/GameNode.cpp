@@ -22,7 +22,7 @@ HRESULT GameNode::init(bool managerInit)
 		IMAGEMANAGER->init();
 		TIMEMANAGER->init();
 		D2DMANAGER->init(getMemDC());
-		//PNGMANAGER->init();
+		
 	}
 
 
@@ -42,8 +42,7 @@ void GameNode::release(void)
 		TIMEMANAGER->releaseSingleton();
 		D2DMANAGER->release();
 		D2DMANAGER->releaseSingleton();
-		//PNGMANAGER->release();
-		//PNGMANAGER->releaseSingleton();
+	
 
 	}
 	ReleaseDC(_hWnd, _hdc);

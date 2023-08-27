@@ -83,8 +83,8 @@ using namespace MY_UTIL;
 
 #define WINSTART_X	0
 #define WINSTART_Y	0
-#define WINSIZE_X	GetSystemMetrics(SM_CXSCREEN) //GetSystemMetrics()인자로 전달되는 시스템 설정 정보를 반환
-#define WINSIZE_Y	GetSystemMetrics(SM_CYSCREEN) //SM_CXSCREEN ,SM_CYSCREEN 현제 화면 해상도 반환(x,y축) 
+#define WINSIZE_X	GetSystemMetrics(SM_CXSCREEN) 
+#define WINSIZE_Y	GetSystemMetrics(SM_CYSCREEN) 
 #define WINSTYLE	WS_POPUPWINDOW | WS_MAXIMIZE
 
 

@@ -3,7 +3,7 @@ template <class T>
 class SingletonBase
 {
 protected:
-	//ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫
+	
 	static T* singleton;
 
 	SingletonBase() {};

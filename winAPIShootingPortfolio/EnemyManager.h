@@ -56,4 +56,3 @@ public:
 	void setRocketMemoryAddress(Rocket* rk) { _rocket = rk; }
 };
 
-//void setMinion(void);

@@ -8,16 +8,6 @@ HRESULT MainGame::init(void)
 {
 	GameNode::init(true);
 
-
-
-	//_re.init(); 
-
-
-	//_start = new StartScene();
-	//_start->init();
-
-	//_second = new SecondScene();
-	//_second->init();
 	_shootingMap = new ShootingMap;
 	_CharacterChoose = new CharacterChoose;
 	_title = new Title;
@@ -40,8 +30,7 @@ HRESULT MainGame::init(void)
 void MainGame::release(void)
 {
 	GameNode::release();
-	//SAFE_DELETE(_start);
-//	SAFE_DELETE(_second);
+
 
 }
 

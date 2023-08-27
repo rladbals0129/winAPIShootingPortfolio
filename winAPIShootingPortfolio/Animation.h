@@ -4,9 +4,7 @@
 class Animation
 {
 private:
-    //프레임
     typedef vector<POINT> _vFrameList;
-    //프레임 플레이
     typedef vector<int> _vPlayList;
 
 
@@ -34,8 +32,8 @@ public:
     void release(void);
 
     void setDefPlayFrame(bool reverse = false, bool loop = false);
-    void setPlayFrame(int* playArr = nullptr, int arrLen = 0, bool loop = false);  //리소스에서 원하는 이미지 출력 가능
-    void setPlayFrame(int start, int end, bool reverse = false, bool loop = false); //반복
+    void setPlayFrame(int* playArr = nullptr, int arrLen = 0, bool loop = false);  
+    void setPlayFrame(int start, int end, bool reverse = false, bool loop = false); 
 
     void setFPS(int framePerSec);
 

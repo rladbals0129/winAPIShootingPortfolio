@@ -1,18 +1,6 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-bool Enemy::bulletCountFire()
-{
-	//if (_rndFireCount + _bulletFireCount <= TIMEMANAGER->getWorldTime())
-	//{
-	//	_bulletFireCount = TIMEMANAGER->getWorldTime();
-	//	_rndFireCount = RND->getFromFloatTo(rndStart, rndEnd);
-
-	//	return true;
-	//}
-	//return false;
-	return false;
-}
 
 Enemy::Enemy(void) : _rc(RectMake(0, 0, 0, 0)),
 _currentFrameX(0),
@@ -78,11 +66,6 @@ HRESULT Enemy::init(const char* imageName, POINT position, float startAngle)
 	_bulletFireCount = TIMEMANAGER->getWorldTime();
 	_rndFireCount = RND->getFromFloatTo(1.5f, 4.5f);
 
-
-
-	//_effectPNGRender = new PNGRender;
-	//_effectPNGRender->init();
-	//_effectPNGRender->addImage(L"Resources/Images/ShootingGame/Effect/boom.png", 960, 576, 5, 3);
 	D2DMANAGER->loadImageD2D("폭파", L"Resources/Images/ShootingGame/Effect/boom2.png", 360, 27, 12, 1);
 	_effectPlaying = false;
 	_effectCurrentFrameX = 0;
@@ -159,7 +142,7 @@ void Enemy::draw(void)
 
 void Enemy::move(void)
 {
-	//적마다 구현 다르므로 자식에서
+	
 }
 
 
@@ -177,3 +160,7 @@ void Enemy::animation(void)
 	}
 }
 
+bool Enemy::bulletCountFire()
+{
+	return false;
+}

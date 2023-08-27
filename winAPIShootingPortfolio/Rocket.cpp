@@ -29,10 +29,6 @@ HRESULT Rocket::init(void)
 	_animA->setDefPlayFrame(false, true);
 	_animA->setFPS(12);	
 
-	//_animMove = new Animation;
-	//_animMove->init(_image->getWidth(), _image->getHeight(), 63, 78);
-	//_animMove->setDefPlayFrame(false, true);
-	//_animMove->setFPS(12);
 	_createPlayer = false;
 
 	_currentHp = 10;
@@ -41,8 +37,7 @@ HRESULT Rocket::init(void)
 	_hpBar->init(_x, _y, 54, 4);
 
 	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
-	//_flame = new Flame;
-	//_flame->init("ºÒ", &_x, &_y);
+
 	_gameClear = false;
 	_goTitle = false;
 	_currentFrame = 3;
@@ -63,8 +58,7 @@ HRESULT Rocket::init(void)
 
 void Rocket::release(void)
 {
-	//_flame->release();
-	//SAFE_DELETE(_flame);
+
 
 	_missile->release();
 	SAFE_DELETE(_missile);
@@ -164,7 +158,7 @@ void Rocket::update(void)
 				if (attackDeleyTime % 20 == 0 && attackDeleyTime !=0)
 				{
 					_assistM1Left->fire(_rc.left, _rc.top);
-					//_assistM1Left->fire(_rc.right, _rc.top);
+				
 					_assistM1Right->fire(_rc.right, _rc.top);
 				}
 				
@@ -243,12 +237,11 @@ void Rocket::update(void)
 		case BEAM:
 			if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 			{
-				//_boomMissile->fire(_x, _y - 430);
-				//_beamIrradiation = true;
+				
 			}
 			else
 			{
-				//_beamIrradiation = false;
+				
 			}
 
 			break;
@@ -268,12 +261,12 @@ void Rocket::update(void)
 		_assistM1Left->update();
 		_assistM1Right->update();
 		_boomMissile->update();
-		//_flame->update();
+	
 	}
 
 	else if (_gameClear)
 	{
-		//_rc = RectMakeCenter(_x, _y, _imageEnd->getFrameWidth(), _imageEnd->getFrameHeight() - 10);
+	
 		if (!_animCrate)
 		{
 			_animA->AniStart();
@@ -305,7 +298,7 @@ void Rocket::update(void)
 			if (_rc.bottom < -100)
 			{
 				_goTitle = true;
-			//	cout << "±Â¤»¤»" << endl;
+		
 			}
 		}
 	}
@@ -320,7 +313,7 @@ void Rocket::render()
 	if (!_gameClear)
 	{
 		_image->frameRender(getMemDC(), _rc.left, _rc.top, _currentFrame, 0);
-		//_flame->render();
+		
 		_missile->render();
 		_assistM1Left->render();
 		_assistM1Right->render();
@@ -342,18 +335,11 @@ void Rocket::usingSkill()
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
 	{
 		_setWeapon = MISSILE;
-		/*_missile = nullptr;
-		_missile = new MissileBase;
-		_missile->init(50,600.f);*/
+		
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F2))
 	{
 		_setWeapon = MISSILE2;
-		//_missile = nullptr;
-
-
-		//_missile = new MissileShotGun;
-		//_missile->init(50,600.f);
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_F3))
 	{
@@ -389,47 +375,3 @@ void Rocket::removeAssiMissileRight(int arrNum)
 	_assistM1Right->removeBullet(arrNum);
 }
 
-
-
-/*
-¿£µù¿¡¾²±â
-
-if(!_animCrate)
-		{
-			_animA->AniStart();
-			_animCrate = true;
-		}
-
-		if (_animA->getNowPlayIdx() > 4)
-		{
-			if (!_setCreateAnim)
-			{
-				_animA->setPlayFrame(4, 6, false, true);
-
-				_setCreateAnim = true;
-			}
-
-		}
-
-		if (!_setCreateAnim)
-		{
-			_createY -= 5;
-			_animA->frameUpdate(0.016f);
-		}
-		else
-		{
-			_animA->frameUpdate(0.016f,4);
-			_createY += 1;
-			if (_createY > 700)
-			{
-				_createPlayer = true;
-			}
-		}
-
-
-		cout << _animA->getNowPlayIdx() << endl;
-
-
-		==·»´õ==
-			_imageEnd->aniRender(getMemDC(), WINSIZE_X / 2, _createY, _animA);
-*/

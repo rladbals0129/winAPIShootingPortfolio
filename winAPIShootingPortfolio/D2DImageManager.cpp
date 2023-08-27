@@ -107,7 +107,7 @@ HRESULT D2DImageManager::D2DLoadBitmap(LPCWSTR fileName, ID2D1DCRenderTarget* ta
 {
     HRESULT hr;
 
-    // IWICBitmapDecoder 초기화
+
     IWICBitmapDecoder* decoder = 0;
     hr = factory->CreateDecoderFromFilename(fileName,
         0,
@@ -119,7 +119,6 @@ HRESULT D2DImageManager::D2DLoadBitmap(LPCWSTR fileName, ID2D1DCRenderTarget* ta
     if (FAILED(hr))
         return hr;
 
-    // IWICBitmapFrameDecode 초기화
     IWICBitmapFrameDecode* frameDecode = 0;
 
     hr = decoder->GetFrame(0, &frameDecode);
@@ -129,7 +128,7 @@ HRESULT D2DImageManager::D2DLoadBitmap(LPCWSTR fileName, ID2D1DCRenderTarget* ta
         return hr;
     }
 
-    // IWICFormatConverter 초기화
+   
     IWICFormatConverter* converter = 0;
     hr = factory->CreateFormatConverter(&converter);
     if (FAILED(hr))
@@ -154,10 +153,10 @@ HRESULT D2DImageManager::D2DLoadBitmap(LPCWSTR fileName, ID2D1DCRenderTarget* ta
         return hr;
     }
 
-    // WIC 비트맵으로부터 D2D 비트맵 생성
+    
     hr = target->CreateBitmapFromWicBitmap(converter, 0, bitmap);
 
-    // 자원 해제
+   
     decoder->Release();
     frameDecode->Release();
     converter->Release();

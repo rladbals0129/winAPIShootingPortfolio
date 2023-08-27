@@ -3,7 +3,6 @@
 
 HRESULT ShootingMap::init(void)
 {
-	//GameNode::init(true);
 	TIMEMANAGER->init();
 	IMAGEMANAGER->addImage("½´ÆÃ¸Ê", "Resources/Images/ShootingGame/BackGround/Stage_1.bmp",
 		WINSIZE_X,18164);
@@ -22,8 +21,6 @@ HRESULT ShootingMap::init(void)
 	_em->getBoss()->setRocketMemoryAddress(_rocket);
 
 
-	//_em->setMissileM1(_rocket->getMissileM1());
-	//_em->setBeam(_rocket->getBeam());
 	return S_OK;
 }
 

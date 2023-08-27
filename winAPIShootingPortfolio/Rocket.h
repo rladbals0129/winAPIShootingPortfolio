@@ -1,6 +1,5 @@
 #pragma once
 #include "GameNode.h"
-//#include "Flame.h"
 #include "Bullets.h"
 #include "Animation.h"
 #include "ProgressBar.h"
@@ -28,10 +27,10 @@ private:
 	GImage* _imageEnd;
 	GImage* _image;
 	GameState _gameState;
-	//Flame* _flame;
+	
 	EnemyManager* _em;
 	Boss* _boss;
-	//
+
 	bool _gameClear;
 	bool _goTitle;
 

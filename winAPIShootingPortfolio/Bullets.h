@@ -22,34 +22,6 @@ struct tagBullet
 };
 
 
-//class Missile : public GameNode
-//{
-//protected:
-//	vector<tagBullet> _vBullet;
-//	vector<tagBullet>::iterator _viBullet;
-//	float _range;
-//
-//public:
-//
-//
-//	virtual HRESULT init(int bulletMax, float range);
-//	void release(void);
-//	void update(void);
-//	void render();
-//
-//	void draw(void);
-//	//int fire(float x, float y);
-//	virtual void fire(float x, float y);
-//
-//	virtual void move(void);
-//
-//	Missile() {}
-//	~Missile() {}
-//
-//
-//};
-
-
 class MissileM1 : public GameNode
 {
 private:
@@ -57,7 +29,7 @@ private:
 	vector<tagBullet>::iterator _viBullet;
 	float _range;
 
-	int _bulletMax; // 장전이되있지 않기때문에 필요
+	int _bulletMax; 
 
 public:
 	HRESULT init(int bulletMax, float range);

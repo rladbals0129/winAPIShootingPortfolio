@@ -2,7 +2,7 @@
 #include "EnemyManager.h"
 #include "Minion.h"
 #include "Rocket.h"
-//#include "Snake.h"
+
 HRESULT EnemyManager::init(void)
 {
 	IMAGEMANAGER->addFrameImage("적1", "Resources/Images/ShootingGame/Enemy/enemy1.bmp", 0.f, 0.f,
@@ -77,9 +77,6 @@ void EnemyManager::update(void)
 	if (_wave == 3 && _bossCreate)
 	{
 		_boss->update();
-
-		//_bossBullet1->update();
-		//_bossBullet2->update();
 	}
 
 
@@ -99,8 +96,6 @@ void EnemyManager::render()
 	if (_wave == 3 && _bossCreate)
 	{
 		_boss->render();
-		//_bossBullet1->render();
-		//_bossBullet2->render();
 	}
 	
 	_bullet->render();
@@ -124,8 +119,7 @@ void EnemyManager::spawnEnemy(void)
 	{
 		if (_enemyIndex < 8)
 		{
-			//int i = _enemyIndex / 4;
-			//int j = _enemyIndex % 4;
+
 
 			Enemy* jellyFish = new Minion(MovePattern::CIRCLE_PATTERN);
 			float startAngle = 0;
@@ -274,83 +268,3 @@ void EnemyManager::collision(void)
 
 
 
-
-/*
-
-
-void EnemyManager::setMinion(void)
-{
-
-
-		for (int i = 0; i < 2; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				Enemy* jellyFish;
-				jellyFish = new Minion(MovePattern::CIRCLE_PATTERN);// Minion 객체 생성
-				// 적 추가 및 초기화
-				float startAngle = static_cast<float>(i * 4 + j) / (4 * 2) * (2 * PI);
-				jellyFish->init("적1", PointMake(0, 0), startAngle);
-
-				_vMinion.push_back(jellyFish); // 벡터에 적 객체 추가
-
-			}
-		}
-
-
-
-		for (int i = 0; i < 2; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				Enemy* jellyFish;
-				jellyFish = new Minion(MovePattern::CIRCLE_PATTERN);// Minion 객체 생성
-				// 적 추가 및 초기화
-				float startAngle = static_cast<float>(i * 4 + j) / (4 * 2) * (2 * PI);
-				jellyFish->init("적1", PointMake(WINSIZE_X, 0), startAngle);
-
-				_vMinion.push_back(jellyFish); // 벡터에 적 객체 추가
-
-			}
-		}
-
-
-
-
-	for (int i = 0; i < 2; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			Enemy* jellyFish;
-			jellyFish = new Minion(MovePattern::BOUNCE_PATTERN); //업케스팅
-			jellyFish->init("적1", PointMake(250 + j * 200, 100 + i * 100));
-
-			_vMinion.push_back(jellyFish);
-
-
-		}
-
-	}
-
-	for (int i = 0; i < 2; i++)
-	{
-		for (int j = 0; j < 4; j++)
-		{
-			POINT start = { 250 + j * 200, 100 + i * 100 };
-			Enemy* jellyFish;
-			jellyFish = new Minion(MovePattern::CENTER_CIRCLE_PATTERN);
-			float startAngle = 0;
-			jellyFish->init("적1", start, startAngle);
-			_vMinion.push_back(jellyFish);
-
-
-		}
-
-	}
-
-
-
-}
-
-
-*/

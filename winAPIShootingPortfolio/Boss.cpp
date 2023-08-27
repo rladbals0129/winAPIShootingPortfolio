@@ -6,7 +6,7 @@ HRESULT Boss::init(const char* imageName, POINT position)
 {
 	_worldTimeCount = GetTickCount();
 	_timeCount = 10.f;
-	_hp = 1000;
+	_hp = 5000;
 	_curPatternCount = 0;
 	_image = IMAGEMANAGER->findImage(imageName);
 

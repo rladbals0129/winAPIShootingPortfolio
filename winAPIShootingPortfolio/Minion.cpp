@@ -30,8 +30,6 @@ void Minion::update(void)
 void Minion::render(void)
 {
 	Enemy::render();
-	//	IMAGEMANAGER->render("체력", getMemDC(), _rc.left, _rc.bottom);
-	//	IMAGEMANAGER->render("체력바", getMemDC(), _rc.left+40, _rc.bottom);
 
 }
 
@@ -46,13 +44,13 @@ void Minion::move()
 			_x = _center.x + radius * cos(_angle + _startAngle);
 			_y = _center.y + radius * sin(_angle + _startAngle);
 
-			//_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
+		
 			break;
 		}
 		case BOUNCE_PATTERN:
 		{		
 			_x += _speedX;	
-			//if (_x < 0 || _x > WINSIZE_X) _speedX = -_speedX;
+			
 
 			if (_x < 0)
 			{
@@ -74,7 +72,7 @@ void Minion::move()
 			_x = _center.x + radius * cos(_angle + _startAngle);
 			_y = _center.y + radius * sin(_angle + _startAngle);
 
-			//_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
+			
 			break;
 		}
 		case WAVE_PATTERN:

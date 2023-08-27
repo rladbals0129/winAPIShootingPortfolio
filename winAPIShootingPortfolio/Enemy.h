@@ -1,6 +1,5 @@
 #pragma once
 #include "GameNode.h"
-#include "PNGRender.h"
 class Enemy : public GameNode
 {
 protected:
@@ -33,7 +32,7 @@ protected:
 	virtual void animation(void);
 
 private:
-	//PNGRender* _effectPNGRender;
+
 	int _effectCurrentFrameX;
 	int _effectCurrentFrameY;
 	bool _effectPlaying;

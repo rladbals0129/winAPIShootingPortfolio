@@ -18,18 +18,18 @@ _loop(false)
 
 HRESULT Animation::init(int totalW, int totalH, int frameW, int frameH)
 {
-    //가로
+    
     _frameWidth = frameW;
     _frameNumWidth = totalW / _frameWidth;
-    //세로
+  
     _frameHeight = frameH;
     _frameNumHeight = totalH / _frameHeight;
-    //총 프레임
+    
     _frameNum = _frameNumWidth * _frameNumHeight;
 
-    _frameList.clear(); //오류방지
+    _frameList.clear(); 
 
-    //추가
+    
     for (int i = 0; i < _frameNumHeight; i++)
     {
         for (int j = 0; j < _frameNumWidth; j++)
@@ -42,7 +42,7 @@ HRESULT Animation::init(int totalW, int totalH, int frameW, int frameH)
         }
     }
 
-    //기본세팅
+ 
     setDefPlayFrame();
 
     return S_OK;
@@ -52,36 +52,35 @@ void Animation::release(void)
 {
 }
 
-//기본프레임 세팅
+
 void Animation::setDefPlayFrame(bool reverse, bool loop)
 {
     _loop = loop;
     _playList.clear();
 
-    //너 다시 돌아오니? 
+
     if (reverse)
     {
         if (_loop)
         {
-            //갈때
+            
             for (int i = 0; i < _frameNum; i++)
             {
                 _playList.push_back(i);
             }
-            //올때
-            for (int i = _frameNum - 2; i > 0; i--) //이 수치를 조정해서 자연스럽게 맞추자. 게임에따라 다름
+        
+            for (int i = _frameNum - 2; i > 0; i--) 
             {
                 _playList.push_back(i);
             }
         }
         else
-        {   //갈때
+        { 
             for (int i = 0; i < _frameNum; i++)
             {
                 _playList.push_back(i);
             }
-            //올때                          elapsedTime때문에 안들어오는경우가 있으니 >=로 잡아주자
-            for (int i = _frameNum - 2; i >= 0; i--) //이 수치를 조정해서 자연스럽게 맞추자. 게임에따라 다름
+            for (int i = _frameNum - 2; i >= 0; i--) 
             {
                 _playList.push_back(i);
             }
@@ -99,11 +98,11 @@ void Animation::setDefPlayFrame(bool reverse, bool loop)
     }
 }
 
-//원하는 프레임(위치) 출력 가능
+
 void Animation::setPlayFrame(int* playARR, int arrLen, bool loop)
 {
     _loop = loop;
-   // _playList.clear();
+
 
     if (_loop)
     {
@@ -128,11 +127,11 @@ void Animation::setPlayFrame(int* playARR, int arrLen, bool loop)
 
 }
 
-//지정해준 구간만 잘라서 재생 -> S -> E
+
 void Animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 {
     _loop = loop;
-    //_playList.clear();
+   
     if (reverse)
     {
         if (_loop)
@@ -172,13 +171,6 @@ void Animation::setPlayFrame(int start, int end, bool reverse, bool loop)
 void Animation::setFPS(int framePerSec)
 {
     _frameUpdateSec = 1.f / framePerSec;
-    /*
-    _frameUpdateSec은 각 프레임 사이에 얼마나 시간이 지나야 다음프레임에 도달하는지에대한 변수
-    framePerSec은 초당프레임 변수이다
-    Sec단위이기때문에 1.f / framePerSec을 하면 원하는 프레임 속도를 맞춰 애니메이션을
-    재생할 수 있다.
-
-    */
 }
 
 void Animation::frameUpdate(float elapsedTime)

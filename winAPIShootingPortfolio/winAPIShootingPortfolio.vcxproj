@@ -147,7 +147,6 @@
     <ClCompile Include="D2DImageManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
-    <ClCompile Include="Flame.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GImage.cpp" />
@@ -155,7 +154,6 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Minion.cpp" />
-    <ClCompile Include="PNGRender.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="ShootingMap.cpp" />
@@ -175,7 +173,6 @@
     <ClInclude Include="D2DImageManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
-    <ClInclude Include="Flame.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GImage.h" />
@@ -183,7 +180,6 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Minion.h" />
-    <ClInclude Include="PNGRender.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="Rocket.h" />

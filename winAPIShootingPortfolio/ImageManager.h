@@ -31,7 +31,7 @@ public:
 
 
 	void render(string strKey, HDC hdc);
-	void render(string strKey, HDC hdc, int destX, int destY); //³¡x¿Í ³¡y
+	void render(string strKey, HDC hdc, int destX, int destY); 
 
 
 	void render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHight);

@@ -9,16 +9,16 @@ class Boss : public GameNode
 private:
 	GImage* _image;
 
-	//포지션(hitBox)
+
 	RECT _rc;
 	POINT _center;
 	float _speedX;
 
 
 
-	float _initialX;  // 시작 x 위치
-	float _amplitude;  // 사인 파동의 진폭
-	float _frequency;  // 사인 파동의 주파수
+	float _initialX;  
+	float _amplitude; 
+	float _frequency;  
 
 	//==애니메이션
 	float _worldTimeCount;
@@ -55,7 +55,7 @@ private:
 	float _bulletFireCount;
 	float _fireCount;
 
-	float _lastBulletFireTime;  // 마지막으로 총알을 발사한 시간을 저장하는 변수입니다.
+	float _lastBulletFireTime; 
 	float _bulletFireDelay;
 
 	//==

@@ -55,8 +55,7 @@ void ShootingMap::collision(void)
 				&CollisionAreaResizing(_em->getMinions()[j]->getRect(), 40, 30)))
 			{
 				_em->getMinions()[j]->setDie(true);
-				//_em->setErased(j);
-				//_em->removeMinion(j);
+		
 				break;
 			}
 		}
