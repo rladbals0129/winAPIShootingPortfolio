@@ -11,5 +11,7 @@ public:
 	void release(void);
 	void update(void);
 	void render();
+
+	bool getNextScene() { return _nextScene; }
 };
 

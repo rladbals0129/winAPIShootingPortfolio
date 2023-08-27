@@ -28,36 +28,9 @@ HRESULT EnemyManager::init(void)
 		true,
 		RGB(255, 0, 255));
 
-
-	//IMAGEMANAGER->addFrameImage("보스미사일1", "Resources/Images/ShootingGame/Bullet/BossBullet1.bmp",
-	//	16, 16,
-	//	1, 1,
-	//	true,
-	//	RGB(255, 0, 255));
-	//_bossBullet1 = new EnemyBullet;
-	//_bossBullet1->init("보스미사일1", 30, 1000);
-
-
-	//IMAGEMANAGER->addFrameImage("보스미사일2", "Resources/Images/ShootingGame/Bullet/BossBullet2.bmp",
-	//	82, 21,
-	//	4, 1,
-	//	true,
-	//	RGB(255, 0, 255));
-	//_bossBullet2 = new EnemyBullet;
-	//_bossBullet2->init("보스미사일2", 30, 1000);
-
-	//IMAGEMANAGER->addFrameImage("보스미사일3", "Resources/Images/ShootingGame/Bullet/BossBullet1.bmp",
-	//	16, 16,
-	//	1, 1,
-	//	true,
-	//	RGB(255, 0, 255));
-	//_bossBullet3 = new EnemyBullet;
-	//_bossBullet3->init("보스미사일3", 30, 1000);
-
-
 	_boss = new Boss;
 	_boss->setRocketMemoryAddress(_rocket);
-	_wave = 3;
+	//_wave = 3;
 
 
 	return S_OK;
@@ -237,7 +210,7 @@ void EnemyManager::spawnEnemy(void)
 		}
 		_enemyIndex++;
 
-		if (_enemyIndex >= 30)
+		if (_enemyIndex >= 24)
 		{
 			_wave++;
 			_enemyIndex = 0;

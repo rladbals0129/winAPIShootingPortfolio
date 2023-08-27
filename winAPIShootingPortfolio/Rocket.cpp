@@ -43,7 +43,8 @@ HRESULT Rocket::init(void)
 	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());
 	//_flame = new Flame;
 	//_flame->init("ºÒ", &_x, &_y);
-
+	_gameClear = false;
+	_goTitle = false;
 	_currentFrame = 3;
 	_boomMissile = new BoomMissile;
 	_boomMissile->init(2, 800.f);
@@ -91,7 +92,7 @@ void Rocket::update(void)
 		
 	}
 
-	if (_createPlayer)
+	if (_createPlayer && !_gameClear)
 	{
 
 		if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && _rc.right < WINSIZE_X && !_beamIrradiation)
@@ -269,7 +270,45 @@ void Rocket::update(void)
 		_boomMissile->update();
 		//_flame->update();
 	}
-	
+
+	else if (_gameClear)
+	{
+		//_rc = RectMakeCenter(_x, _y, _imageEnd->getFrameWidth(), _imageEnd->getFrameHeight() - 10);
+		if (!_animCrate)
+		{
+			_animA->AniStart();
+			_animCrate = true;
+		}
+
+		if (_animA->getNowPlayIdx() > 4)
+		{
+			if (!_setCreateAnim)
+			{
+				_animA->setPlayFrame(4, 6, false, true);
+
+				_setCreateAnim = true;
+			}
+
+		}
+
+		if (!_setCreateAnim)
+		{
+			_rc.top--;
+			_rc.bottom--;
+			_animA->frameUpdate(0.016f);
+		}
+		else
+		{
+			_animA->frameUpdate(0.016f, 4);
+			_rc.top-=3;
+			_rc.bottom -= 3;
+			if (_rc.bottom < -100)
+			{
+				_goTitle = true;
+			//	cout << "±Â¤»¤»" << endl;
+			}
+		}
+	}
 }
 
 void Rocket::render()
@@ -278,15 +317,24 @@ void Rocket::render()
 	{
 		DrawRectMake(getMemDC(), _rc);
 	}
+	if (!_gameClear)
+	{
+		_image->frameRender(getMemDC(), _rc.left, _rc.top, _currentFrame, 0);
+		//_flame->render();
+		_missile->render();
+		_assistM1Left->render();
+		_assistM1Right->render();
+		_boomMissile->render();
+		_hpBar->render();
+	}
 
-	_image->frameRender(getMemDC(), _rc.left, _rc.top, _currentFrame, 0);
-	//_flame->render();
-	_missile->render();
-	_assistM1Left->render();
-	_assistM1Right->render();
-	_boomMissile->render();
 	
-	_hpBar->render();
+	if (_gameClear)
+	{
+		_imageEnd->aniRender(getMemDC(), _rc.left, _rc.top, _animA);
+	}
+	
+	
 }
 
 void Rocket::usingSkill()

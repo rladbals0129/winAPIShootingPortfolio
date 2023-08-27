@@ -41,6 +41,10 @@ void ShootingMap::update(void)
 
 	_rocket->update();
 	_em->update();
+	if (_rocket->getGoTitle())
+	{
+		_goTitle = true;
+	}
 }
 
 void ShootingMap::render(void)

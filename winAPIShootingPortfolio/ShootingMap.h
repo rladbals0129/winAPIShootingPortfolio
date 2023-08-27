@@ -11,6 +11,7 @@ private:
 	Boss* _boss;
 	int _x; 
 	int _y;
+	bool _goTitle;
 public:
 	HRESULT init(void);
 	void release(void);
@@ -18,6 +19,9 @@ public:
 	void render(void);
 	void d2drender(void);
 	virtual void collision(void);
+
+	Rocket* getRocket() { return _rocket; }
+	bool getGoTitle() { return _goTitle; }
 
 };
 

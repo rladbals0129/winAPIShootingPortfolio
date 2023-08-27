@@ -184,6 +184,7 @@ void Boss::render()
 			_effectCurrentFrameX = 0;
 			_effectPlaying = false;
 			_die = true;
+			_rocket->setGameClear(true);
 		}
 
 

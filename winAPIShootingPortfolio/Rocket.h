@@ -31,6 +31,9 @@ private:
 	//Flame* _flame;
 	EnemyManager* _em;
 	Boss* _boss;
+	//
+	bool _gameClear;
+	bool _goTitle;
 
 	float _leftRightCount;
 	int _currentFrame;
@@ -79,7 +82,8 @@ public:
 	void hitDamage(float x) { _currentHp -= x; }
 	void setEnemyManagerMemoryAddress(EnemyManager* em) { _em = em; }
 	void setBossMemoryAddress(Boss* boss) { _boss = boss; }
-	
+	void setGameClear(int x) { _gameClear = x; }
+	bool getGoTitle() { return _goTitle; }
 
 	POINT getPosition() { return PointMake((int)_x, (int)_y); }
 };

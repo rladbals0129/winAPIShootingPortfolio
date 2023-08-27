@@ -5,25 +5,25 @@
 #pragma comment(lib, "vfw32.lib")
 
 HRESULT Title::init(void)
-{/*
+{
 	_hWndVideo = MCIWndCreate(_hWnd, _hInstance, MCIWNDF_NOPLAYBAR, "Resources/Video/Title.wmv");
 
 	MoveWindow(_hWndVideo, 0, 0, WINSIZE_X, WINSIZE_Y, FALSE);
 
-	MCIWndPlay(_hWndVideo);*/
-
+	MCIWndPlay(_hWndVideo);
+    _nextScene = false;
 	return S_OK;
 }
 
 void Title::release(void)
 {
-	//MCIWndClose(_hWndVideo);
-	//MCIWndDestroy(_hWndVideo);
+	MCIWndClose(_hWndVideo);
+	MCIWndDestroy(_hWndVideo);
 }
 
 void Title::update(void)
 {
-   /* if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
+    if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
     {
         _nextScene = true;
         release();
@@ -32,7 +32,7 @@ void Title::update(void)
     {
         MCIWndSeek(_hWndVideo, 0);
         MCIWndPlay(_hWndVideo);
-    }*/
+    }
 }
 
 void Title::render()
